@@ -10,3 +10,4 @@ cardano-cli address key-hash --payment-verification-key-file datum22.vkey --out-
 datum22.addr
 cardano-cli query utxo --addr_test1wrweuwqm44swpvryhah4y8duf56a5lj4g4v2cx04yau7rqcfgxs6e --testnet-magic 2
 
+
