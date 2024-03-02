@@ -35,6 +35,12 @@ datum22 datum _ _
  | datum == mkI 22     = ()
  | otherwise           = error ()
 
+{-# INLINABLE datum23 #-}
+datum23 :: BuiltinData -> BuiltinData -> BuiltinData -> ()
+datum23 datum _ _ 
+ | datum == mkI 23     = ()
+ | otherwise           = error ()
+
 
 alwaysSucceedsValidator :: Validator
 alwaysSucceedsValidator = mkValidatorScript $$(PlutusTx.compile [|| alwaysSucceeds ||])  
@@ -46,7 +52,10 @@ redeemer11Validator :: Validator
 redeemer11Validator = mkValidatorScript $$(PlutusTx.compile [|| redeemer11 ||])  
 
 datum22Validator :: Validator
-datum22Validator = mkValidatorScript $$(PlutusTx.compile [|| datum22 ||])  
+datum22Validator = mkValidatorScript $$(PlutusTx.compile [|| datum22 ||])
+
+datum23Validator :: Validator
+datum23Validator = mkValidatorScript $$(PlutusTx.compile [|| datum23 ||])
 
 
 {- Serialised Scripts and Values -}
@@ -63,6 +72,9 @@ saveRedeemer11 =  writeValidatorToFile "./testnet/redeemer11.plutus" redeemer11V
 saveDatum22 :: IO ()
 saveDatum22 =  writeValidatorToFile "./testnet/datum22.plutus" datum22Validator
 
+saveDatum23 :: IO ()
+saveDatum23 =  writeValidatorToFile "./testnet/datum23.plutus" datum23Validator
+
 saveUnit :: IO ()
 saveUnit = writeDataToFile "./testnet/unit.json" ()
 
@@ -78,14 +90,19 @@ saveValue11 = writeDataToFile "./testnet/value11.json" (11 :: Integer)
 saveValue22 :: IO ()
 saveValue22 = writeDataToFile "./testnet/value22.json" (22 :: Integer)
 
+saveValue23 :: IO ()
+saveValue23 = writeDataToFile "./testnet/value23.json" (23 :: Integer)
+
 saveAll :: IO ()
 saveAll = do
             saveAlwaysSucceeds
             saveAlwaysFails
             saveRedeemer11
             saveDatum22
+            saveDatum23
             saveUnit
             saveTrue
             saveFalse
             saveValue11
             saveValue22
+            saveValue23
