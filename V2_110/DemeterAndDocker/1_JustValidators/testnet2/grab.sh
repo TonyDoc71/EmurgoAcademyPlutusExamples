@@ -6,6 +6,8 @@ signerPKH=$(cat ialice.pkh)
 nami="<provide a wallet to see the tx in blockchain explorers>" 
 PREVIEW="--testnet-magic 2"
 
+cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.params
+
 cardano-cli transaction build \
   --babbage-era \
   $PREVIEW \

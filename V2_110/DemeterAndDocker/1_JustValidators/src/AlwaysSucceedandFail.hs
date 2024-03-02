@@ -15,7 +15,7 @@ import                  Prelude                     (IO)
  
 --THE ON-CHAIN CODE
 
-{-# INLINABLE alwaysSucceeds #-}                                    -- Everything that its supposed to run in on-chain code need this pragma
+{-# INLINABLE alwaysSucceeds #-}                                    -- Everything that its supposed to run in on-chain code need this program
 alwaysSucceeds :: BuiltinData -> BuiltinData -> BuiltinData -> ()   -- the value of this function is on its sideeffects
 alwaysSucceeds _ _ _ = () 
 
@@ -58,40 +58,43 @@ datum23Validator :: Validator
 datum23Validator = mkValidatorScript $$(PlutusTx.compile [|| datum23 ||])
 
 
+
+
 {- Serialised Scripts and Values -}
 
 saveAlwaysSucceeds :: IO ()
-saveAlwaysSucceeds =  writeValidatorToFile "./testnet/alwaysSucceeds.plutus" alwaysSucceedsValidator
+saveAlwaysSucceeds =  writeValidatorToFile "./HandsOnOne/alwaysSucceeds.plutus" alwaysSucceedsValidator
 
 saveAlwaysFails :: IO ()
-saveAlwaysFails =  writeValidatorToFile "./testnet/alwaysFails.plutus" alwaysFailsValidator
+saveAlwaysFails =  writeValidatorToFile "./HandsOnOne/alwaysFails.plutus" alwaysFailsValidator
 
 saveRedeemer11 :: IO ()
-saveRedeemer11 =  writeValidatorToFile "./testnet/redeemer11.plutus" redeemer11Validator
+saveRedeemer11 =  writeValidatorToFile "./HandsOnOne/redeemer11.plutus" redeemer11Validator
 
 saveDatum22 :: IO ()
-saveDatum22 =  writeValidatorToFile "./testnet/datum22.plutus" datum22Validator
+saveDatum22 =  writeValidatorToFile "./HandsOnOne/datum22.plutus" datum22Validator
 
 saveDatum23 :: IO ()
-saveDatum23 =  writeValidatorToFile "./testnet/datum23.plutus" datum23Validator
+saveDatum23 =  writeValidatorToFile "./HandsOnOne/datum23.plutus" datum23Validator
 
 saveUnit :: IO ()
-saveUnit = writeDataToFile "./testnet/unit.json" ()
+saveUnit = writeDataToFile "./HandsOnOne/unit.json" ()
 
 saveTrue :: IO ()
-saveTrue = writeDataToFile "./testnet/True.json" True
+saveTrue = writeDataToFile "./HandsOnOne/True.json" True
 
 saveFalse :: IO ()
-saveFalse = writeDataToFile "./testnet/False.json" False
+saveFalse = writeDataToFile "./HandsOnOne/False.json" False
 
 saveValue11 :: IO ()
-saveValue11 = writeDataToFile "./testnet/value11.json" (11 :: Integer)
+saveValue11 = writeDataToFile "./HandsOnOne/value11.json" (11 :: Integer)
 
 saveValue22 :: IO ()
-saveValue22 = writeDataToFile "./testnet/value22.json" (22 :: Integer)
+saveValue22 = writeDataToFile "./HandsOnOne/value22.json" (22 :: Integer)
 
 saveValue23 :: IO ()
-saveValue23 = writeDataToFile "./testnet/value23.json" (23 :: Integer)
+saveValue23 = writeDataToFile "./HandsOnOne/value23.json" (23 :: Integer)
+
 
 saveAll :: IO ()
 saveAll = do
