@@ -1,6 +1,6 @@
-utxoin="eeafd5c0f3d2c9c010a150a297a099ff973e73eca11a85bbcc9d083821758853#0"
+utxoin="4cc6a67111571267b30b146f818256e797004aa8592abb11b62dbf5d77bead47#3"
 address=$(cat datum22.addr) 
-output="54000000"
+output="829000000"
 PREVIEW="--testnet-magic 2"
 
 
@@ -11,14 +11,18 @@ cardano-cli transaction build \
   $PREVIEW \
   --tx-in $utxoin \
   --tx-out $address+$output \
+  --tx-out-datum-hash-file value23.json \
+  --tx-out $address+$output \
+  --tx-out-datum-hash-file True.json \
+  --tx-out $address+$output \
   --tx-out-datum-hash-file unit.json \
-  --change-address "addr_test1qrpzz8whcft2g6z24ft4072s76x8gmj5wn32dxvtr4zcpuqltc67z9ljrqml3hc5mutuher549lwgv2g6n4z0a3ztyesj7sd80" \
+  --change-address "addr_test1qra8rx05s9dv4690meheacnnjhs6uj49x24jmtp76e9c2ylede7uzn8enzys93d8735fa93ltmnpnp578vkhkf37a7eqwqcecv" \
   --protocol-params-file protocol.params \
   --out-file give.unsigned
 
 cardano-cli transaction sign \
     --tx-body-file give.unsigned \
-    --signing-key-file ../../WalletMine/4payment2.skey \
+    --signing-key-file ../../WalletMine/2batch107.skey \
     $PREVIEW \
     --out-file give.signed
 

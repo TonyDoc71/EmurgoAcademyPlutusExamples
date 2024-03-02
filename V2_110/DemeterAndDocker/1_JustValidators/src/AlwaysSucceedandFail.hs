@@ -42,6 +42,14 @@ datum23 datum _ _
  | otherwise           = error ()
 
 
+{-# INLINABLE datumEqredeemer #-}
+datumEqredeemer :: BuiltinData -> BuiltinData -> BuiltinData -> ()
+datumEqredeemer datum redeemer _ 
+ | redeemer == datum    = ()
+ | redeemer == mkI 11   = ()
+ | otherwise            = error ()
+
+
 alwaysSucceedsValidator :: Validator
 alwaysSucceedsValidator = mkValidatorScript $$(PlutusTx.compile [|| alwaysSucceeds ||])  
 
@@ -57,7 +65,8 @@ datum22Validator = mkValidatorScript $$(PlutusTx.compile [|| datum22 ||])
 datum23Validator :: Validator
 datum23Validator = mkValidatorScript $$(PlutusTx.compile [|| datum23 ||])
 
-
+datumEqredeemerValidator :: Validator
+datumEqredeemerValidator = mkValidatorScript $$(PlutusTx.compile [|| datumEqredeemer ||])
 
 
 {- Serialised Scripts and Values -}
@@ -76,6 +85,9 @@ saveDatum22 =  writeValidatorToFile "./HandsOnOne/datum22.plutus" datum22Validat
 
 saveDatum23 :: IO ()
 saveDatum23 =  writeValidatorToFile "./HandsOnOne/datum23.plutus" datum23Validator
+
+saveDatumEqredeemer :: IO ()
+saveDatumEqredeemer = writeValidatorToFile "./HandsOnOne/datumEqredeemer.plutus" datumEqredeemerValidator
 
 saveUnit :: IO ()
 saveUnit = writeDataToFile "./HandsOnOne/unit.json" ()
@@ -109,3 +121,4 @@ saveAll = do
             saveValue11
             saveValue22
             saveValue23
+            saveDatumEqredeemer
