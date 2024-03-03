@@ -1,6 +1,6 @@
-utxoin="eeafd5c0f3d2c9c010a150a297a099ff973e73eca11a85bbcc9d083821758853#0"
-address=$(cat datum22.addr) 
-output="54000000"
+utxoin="eeafd5c0f3d2c9c010a150a297a099ff973e73eca11a85bbcc9d083821758853#4"
+address=$(cat datum999.addr) 
+output="50000000"
 PREVIEW="--testnet-magic 2"
 
 
@@ -11,8 +11,10 @@ cardano-cli transaction build \
   $PREVIEW \
   --tx-in $utxoin \
   --tx-out $address+$output \
-  --tx-out-datum-hash-file unit.json \
-  --change-address "addr_test1qrpzz8whcft2g6z24ft4072s76x8gmj5wn32dxvtr4zcpuqltc67z9ljrqml3hc5mutuher549lwgv2g6n4z0a3ztyesj7sd80" \
+  --tx-out-datum-hash-file value999.json \
+  --tx-out $address+$output \
+  --tx-out-datum-hash-file True.json \
+  --change-address "addr_test1qzwmwrahq43k0q5cktcv8dfh3ud9y3kr6udvp86heryd7w38rdzjclsf9svxrl67346q6a9uawvykesynl2d6cjt0plsuztp5u" \
   --protocol-params-file protocol.params \
   --out-file give.unsigned
 

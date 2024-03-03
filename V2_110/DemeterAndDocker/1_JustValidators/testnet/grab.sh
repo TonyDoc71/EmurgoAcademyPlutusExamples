@@ -1,9 +1,10 @@
-utxoin="027e4f8af09c8649c81c4defc7cde6a8d077439a894a604ee57c62375f2143ef#0"
+utxoin1="4b685ca21208c298afc218824174bc3f3c48952a45d670ae504ddc74f4584986#0"
+utxoin2="4b685ca21208c298afc218824174bc3f3c48952a45d670ae504ddc74f4584986#1"
 address=$(cat ../../WalletMine/4stake2.addr) 
-output="49000000"
+output="45000000"
 collateral="6a2d6721fde0880c0e9eaa267eb038f0abce7462b915dad0cc903299053922b6#1"
 signerPKH=$(cat ../../WalletMine/5payment3.pkh)
-nami="addr_test1qz32zkseq8gz9ygphje3v2tzjggvarfveuzc6pd0age7yumayw8ggdd4v37lthf9pq4tn9pzq2v6njtn8s748wrkw9tqszuju7" 
+nami="addr_test1qzwmwrahq43k0q5cktcv8dfh3ud9y3kr6udvp86heryd7w38rdzjclsf9svxrl67346q6a9uawvykesynl2d6cjt0plsuztp5u" 
 PREVIEW="--testnet-magic 2"
 
 cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.params
@@ -11,10 +12,14 @@ cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.para
 cardano-cli transaction build \
   --babbage-era \
   $PREVIEW \
-  --tx-in $utxoin \
-  --tx-in-script-file datum22.plutus \
-  --tx-in-datum-file unit.json \
-  --tx-in-redeemer-file unit.json \
+  --tx-in $utxoin1 \
+  --tx-in-script-file datum999.plutus \
+  --tx-in-datum-file True.json \
+  --tx-in-redeemer-file True.json \
+  --tx-in $utxoin2 \
+  --tx-in-script-file datum999.plutus \
+  --tx-in-datum-file value999.json \
+  --tx-in-redeemer-file value999.json \
   --required-signer-hash $signerPKH \
   --tx-in-collateral $collateral \
   --tx-out $address+$output \
