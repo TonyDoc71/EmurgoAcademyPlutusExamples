@@ -4,6 +4,9 @@ cardano-cli address build --payment-script-file redeemer11.plutus --testnet-magi
 cardano-cli address build --payment-script-file datum22.plutus --testnet-magic 2 --out-file datum22.addr
 cardano-cli address build --payment-script-file datum23.plutus --testnet-magic 2 --out-file datum23.addr
 cardano-cli address build --payment-script-file datum23.plutus --testnet-magic 2 --out-file datumEqredeemer.addr
+cardano-cli address build --payment-script-file datum23.plutus --testnet-magic 2 --out-file datum999.addr
+
+
 
 ## this is using the logic from the plutus scripts to derive the addresses
 ## in cardano the adresses already exist you just need to discover them through your logic in the plutus script

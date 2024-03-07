@@ -71,10 +71,8 @@ datum22Validator = mkValidatorScript $$(PlutusTx.compile [|| datum22 ||])
 datum23Validator :: Validator
 datum23Validator = mkValidatorScript $$(PlutusTx.compile [|| datum23 ||])
 
-
 datum999Validator :: Validator
 datum999Validator = mkValidatorScript $$(PlutusTx.compile [|| datum999 ||])
-
 
 datumEqredeemerValidator :: Validator
 datumEqredeemerValidator = mkValidatorScript $$(PlutusTx.compile [|| datumEqredeemer ||])
@@ -83,46 +81,46 @@ datumEqredeemerValidator = mkValidatorScript $$(PlutusTx.compile [|| datumEqrede
 {- Serialised Scripts and Values -}
 
 saveAlwaysSucceeds :: IO ()
-saveAlwaysSucceeds =  writeValidatorToFile "./testnet/alwaysSucceeds.plutus" alwaysSucceedsValidator
+saveAlwaysSucceeds =  writeValidatorToFile "./HandsOnOne/alwaysSucceeds.plutus" alwaysSucceedsValidator
 
 saveAlwaysFails :: IO ()
-saveAlwaysFails =  writeValidatorToFile "./testnet/alwaysFails.plutus" alwaysFailsValidator
+saveAlwaysFails =  writeValidatorToFile "./HandsOnOne/alwaysFails.plutus" alwaysFailsValidator
 
 saveRedeemer11 :: IO ()
-saveRedeemer11 =  writeValidatorToFile "./testnet/redeemer11.plutus" redeemer11Validator
+saveRedeemer11 =  writeValidatorToFile "./HandsOnOne/redeemer11.plutus" redeemer11Validator
 
 saveDatum22 :: IO ()
-saveDatum22 =  writeValidatorToFile "./testnet/datum22.plutus" datum22Validator
+saveDatum22 =  writeValidatorToFile "./HandsOnOne/datum22.plutus" datum22Validator
 
 saveDatum23 :: IO ()
-saveDatum23 =  writeValidatorToFile "./testnet/datum23.plutus" datum23Validator
+saveDatum23 =  writeValidatorToFile "./HandsOnOne/datum23.plutus" datum23Validator
 
 saveDatum999 :: IO ()
-saveDatum999 =  writeValidatorToFile "./testnet/datum999.plutus" datum999Validator
+saveDatum999 =  writeValidatorToFile "./HandsOnOne/datum999.plutus" datum999Validator
 
 saveDatumEqredeemer :: IO ()
-saveDatumEqredeemer = writeValidatorToFile "./testnet/datumEqredeemer.plutus" datumEqredeemerValidator
+saveDatumEqredeemer = writeValidatorToFile "./HandsOnOne/datumEqredeemer.plutus" datumEqredeemerValidator
 
 saveUnit :: IO ()
-saveUnit = writeDataToFile "./testnet/unit.json" ()
+saveUnit = writeDataToFile "./HandsOnOne/unit.json" ()
 
 saveTrue :: IO ()
-saveTrue = writeDataToFile "./testnet/True.json" True
+saveTrue = writeDataToFile "./HandsOnOne/True.json" True
 
 saveFalse :: IO ()
-saveFalse = writeDataToFile "./testnet/False.json" False
+saveFalse = writeDataToFile "./HandsOnOne/False.json" False
 
 saveValue11 :: IO ()
-saveValue11 = writeDataToFile "./testnet/value11.json" (11 :: Integer)
+saveValue11 = writeDataToFile "./HandsOnOne/value11.json" (11 :: Integer)
 
 saveValue22 :: IO ()
-saveValue22 = writeDataToFile "./testnet/value22.json" (22 :: Integer)
+saveValue22 = writeDataToFile "./HandsOnOne/value22.json" (22 :: Integer)
 
 saveValue23 :: IO ()
-saveValue23 = writeDataToFile "./testnet/value23.json" (23 :: Integer)
+saveValue23 = writeDataToFile "./HandsOnOne/value23.json" (23 :: Integer)
 
 saveValue999 :: IO ()
-saveValue999 = writeDataToFile "./testnet/value999.json" (999 :: Integer)
+saveValue999 = writeDataToFile "./HandsOnOne/value999.json" (999 :: Integer)
 
 saveAll :: IO ()
 saveAll = do

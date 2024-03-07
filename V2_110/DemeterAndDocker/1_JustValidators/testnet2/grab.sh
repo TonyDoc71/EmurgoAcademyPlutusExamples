@@ -1,9 +1,11 @@
-utxoin="f37b0b6773619a97ec28459bfc997eb9610c41a1c20d2d8e406823516d07f02c#0"
-address=$(cat ialice.addr) 
-output="450000000"
-collateral="4cbf990857530696a12b0062546a4b123ad0bef21c67562e32d03e3288bdcd7b#0"
-signerPKH=$(cat ialice.pkh)
-nami="<provide a wallet to see the tx in blockchain explorers>" 
+utxoin0="3464c7c26c75c99a989e39797ee6a2f161b63f826de53878f19c4724afaa8946#0"
+utxoin1="3464c7c26c75c99a989e39797ee6a2f161b63f826de53878f19c4724afaa8946#1"
+utxoin2="3464c7c26c75c99a989e39797ee6a2f161b63f826de53878f19c4724afaa8946#2"
+address=$(cat datum22.addr) 
+output="800000000"
+collateral="eeafd5c0f3d2c9c010a150a297a099ff973e73eca11a85bbcc9d083821758853#5"
+signerPKH=$(cat ../../WalletMine/5payment3.pkh)
+nami="addr_test1qzwmwrahq43k0q5cktcv8dfh3ud9y3kr6udvp86heryd7w38rdzjclsf9svxrl67346q6a9uawvykesynl2d6cjt0plsuztp5u" 
 PREVIEW="--testnet-magic 2"
 
 cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.params
@@ -11,7 +13,15 @@ cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.para
 cardano-cli transaction build \
   --babbage-era \
   $PREVIEW \
-  --tx-in $utxoin \
+  --tx-in $utxoin0 \
+  --tx-in-script-file datum22.plutus \
+  --tx-in-datum-file value22.json \
+  --tx-in-redeemer-file value22.json \
+  --tx-in $utxoin1 \
+  --tx-in-script-file datum22.plutus \
+  --tx-in-datum-file True.json \
+  --tx-in-redeemer-file True.json \
+  --tx-in $utxoin2 \
   --tx-in-script-file datum22.plutus \
   --tx-in-datum-file unit.json \
   --tx-in-redeemer-file unit.json \
@@ -24,7 +34,7 @@ cardano-cli transaction build \
 
 cardano-cli transaction sign \
     --tx-body-file grab.unsigned \
-    --signing-key-file ialice.skey \
+    --signing-key-file ../../WalletMine/5payment3.skey \
     $PREVIEW \
     --out-file grab.signed
 

@@ -138,19 +138,40 @@ $ saveAll
 bash $ chmod +x create.sh
 bash $ ./create.sh
 
+## create a new shell script file createAddr.sh
+cardano-cli address build --payment-script-file alwaysSucceeds.plutus --testnet-magic 2 --out-file alwaysSucceeds.addr
+cardano-cli address build --payment-script-file alwaysFails.plutus --testnet-magic 2 --out-file alwaysFails.addr
+cardano-cli address build --payment-script-file redeemer11.plutus --testnet-magic 2 --out-file redeemer11.addr
+cardano-cli address build --payment-script-file datum22.plutus --testnet-magic 2 --out-file datum22.addr
+cardano-cli address build --payment-script-file datum23.plutus --testnet-magic 2 --out-file datum23.addr
+cardano-cli address build --payment-script-file datum23.plutus --testnet-magic 2 --out-file datumEqredeemer.addr
+cardano-cli address build --payment-script-file datum23.plutus --testnet-magic 2 --out-file datum999.addr
+
+
+
+## this is using the logic from the plutus scripts to derive the addresses
+## in cardano the adresses already exist you just need to discover them through your logic in the plutus script or the arbitary logic from the keys
+## if you want a unique address you need to have unique logic in your script
+## as these are from the course everyone is using the same logic logic so get the same address
+
+bash $ chmod +x createAddr.sh
+bash $ ./createAddr.sh
+
+
+
 
 
 ## give.sh script
 
 utxoin="4cc6a67111571267b30b146f818256e797004aa8592abb11b62dbf5d77bead47#3"
-address=$(cat datum22.addr) 
+address=$(cat datumEqredeemer.addr) 
 output="829000000"
 PREVIEW="--testnet-magic 2"
 
 
 cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.params
 
-## below will creat 3 separate UTXOs of 829000000 but there will only be 1x 8290000000 in value
+## below will creat 3 separate UTXOs of 829000000 
 ## you will need to look at the explorer to determine the datum for each UTXO for your grab.sh script
 
 cardano-cli transaction build \
@@ -178,3 +199,77 @@ cardano-cli transaction sign \
     --tx-file give.signed
 
 
+
+## new transaction ##
+
+## give.sh
+
+utxoin="30e919fd41fc46e1adb2039ed89b25a4f14e7816674b4ff5fd5966c182e65376#0"
+address=$(cat datum999.addr) 
+output="9000000"
+PREVIEW="--testnet-magic 2"
+
+
+cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.params
+
+cardano-cli transaction build \
+  --babbage-era \
+  $PREVIEW \
+  --tx-in $utxoin \
+  --tx-out $address+$output \
+  --tx-out-datum-hash-file value999.json \
+  --change-address "addr_test1qzwmwrahq43k0q5cktcv8dfh3ud9y3kr6udvp86heryd7w38rdzjclsf9svxrl67346q6a9uawvykesynl2d6cjt0plsuztp5u" \
+  --protocol-params-file protocol.params \
+  --out-file give.unsigned
+
+cardano-cli transaction sign \
+    --tx-body-file give.unsigned \
+    --signing-key-file ../../WalletMine/4payment2.skey \
+    $PREVIEW \
+    --out-file give.signed
+
+ cardano-cli transaction submit \
+    $PREVIEW \
+    --tx-file give.signed
+
+
+## grab.sh
+
+utxoin1="eb096e45ae95f270129d2884063efd3df3c7fb69a2a50b1d519e9aaddfa74fe2#0"
+address=$(cat ../../WalletMine/4stake2.addr) 
+output="6000000"
+collateral="6a2d6721fde0880c0e9eaa267eb038f0abce7462b915dad0cc903299053922b6#1"
+signerPKH=$(cat ../../WalletMine/5payment3.pkh)
+nami="addr_test1qzwmwrahq43k0q5cktcv8dfh3ud9y3kr6udvp86heryd7w38rdzjclsf9svxrl67346q6a9uawvykesynl2d6cjt0plsuztp5u" 
+PREVIEW="--testnet-magic 2"
+
+cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.params
+
+cardano-cli transaction build \
+  --babbage-era \
+  $PREVIEW \
+  --tx-in $utxoin1 \
+  --tx-in-script-file datum999.plutus \
+  --tx-in-datum-file value999.json \
+  --tx-in-redeemer-file unit.json \               ## wasn't using the redeemer so it was ok to pass unit.json
+  --required-signer-hash $signerPKH \
+  --tx-in-collateral $collateral \
+  --tx-out $address+$output \
+  --change-address $nami \
+  --protocol-params-file protocol.params \
+  --out-file grab.unsigned
+
+cardano-cli transaction sign \
+    --tx-body-file grab.unsigned \
+    --signing-key-file ../../WalletMine/5payment3.skey \
+    $PREVIEW \
+    --out-file grab.signed
+
+ cardano-cli transaction submit \
+    $PREVIEW \
+    --tx-file grab.signed
+
+
+## needed to use value999.json as the value was locked on address datum999.addr which is 
+## uses the logic from t he plutus script and was expecting a value of type Int 999
+## this validator datum999.plutus will only be able to be unlocked when you attach a datum with a value of 999

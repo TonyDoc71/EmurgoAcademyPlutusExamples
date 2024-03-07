@@ -1,8 +1,6 @@
-utxoin1="3464c7c26c75c99a989e39797ee6a2f161b63f826de53878f19c4724afaa8946#0"
-utxoin2="3464c7c26c75c99a989e39797ee6a2f161b63f826de53878f19c4724afaa8946#1"
-utxoin3="3464c7c26c75c99a989e39797ee6a2f161b63f826de53878f19c4724afaa8946#2"
+utxoin1="fb04ce26899085df9aa876f6cda684f1eb18bb92af12ec13b6c9c7d137033b3e#0"
 address=$(cat ../../WalletMine/4stake2.addr) 
-output="800000000"
+output="10000000"
 collateral="6a2d6721fde0880c0e9eaa267eb038f0abce7462b915dad0cc903299053922b6#1"
 signerPKH=$(cat ../../WalletMine/5payment3.pkh)
 nami="addr_test1qzwmwrahq43k0q5cktcv8dfh3ud9y3kr6udvp86heryd7w38rdzjclsf9svxrl67346q6a9uawvykesynl2d6cjt0plsuztp5u" 
@@ -15,14 +13,8 @@ cardano-cli transaction build \
   $PREVIEW \
   --tx-in $utxoin1 \
   --tx-in-script-file datumEqredeemer.plutus \
-  --tx-in-datum-file True.json \
-  --tx-in-redeemer-file True.json \
-  --tx-in-script-file datumEqredeemer.plutus \
-  --tx-in-datum-file unit.json \
-  --tx-in-redeemer-file unit.json \
-  --tx-in-script-file datumEqredeemer.plutus \
-  --tx-in-datum-file value23.json \
-  --tx-in-redeemer-file value23.json \
+  --tx-in-datum-file value11.json \
+  --tx-in-redeemer-file value11.json \
   --required-signer-hash $signerPKH \
   --tx-in-collateral $collateral \
   --tx-out $address+$output \
