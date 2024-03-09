@@ -3,6 +3,10 @@
 ## always check your collateral UTXO is valid before transacting to avoid failure from already getting consumed on previous 
 ## failed transaction.
 
+## with datum22, datum23, datum999 these will only be able to unlock UTXOs with that specific value
+## any other value will be locked forever.
+## use datumEqredeemer or dEQr  to lock UTXOs with any datum and still be able to unlock
+
 
 
 ## give.sh
@@ -137,7 +141,7 @@ datum23 datum _ _
 {-# INLINABLE datum999 #-}
 datum999 :: BuiltinData -> BuiltinData -> BuiltinData -> ()
 datum999 datum _ _ 
- | datum == mkI 999    = ()
+ | datum == mkI 999    = ()                      -- this will only allow you to unlock UTXOs with this value, *** no other value will be able to be redeemed
  | otherwise           = error ()
 
 
@@ -152,8 +156,8 @@ datumEqredeemer datum redeemer _
 {-# INLINEABLE dEQr #-}
 dEQr :: BuiltinData -> BuiltinData -> BuiltinData -> ()
 dEQr datum redeemer _
- | redeemer == datum    = ()
- | redeemer == mkI 11   = ()
+ | redeemer == datum    = ()                           -- this allows you to use any value to lock and unlock instead of just the value in the logic
+ | redeemer == mkI 11   = ()                           -- this is the escape clause that will always allow you to redeem the UTXO
  | otherwise            = error ()
 
 
