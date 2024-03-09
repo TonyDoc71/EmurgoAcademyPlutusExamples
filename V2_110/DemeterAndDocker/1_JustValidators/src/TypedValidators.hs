@@ -84,40 +84,40 @@ customTypedRedeemer11Val = PlutusV2.mkValidatorScript $$(PlutusTx.compile [|| ma
 {- Serialised Scripts and Values -}
 
 saveTypedDatum22 :: IO ()
-saveTypedDatum22 =  writeValidatorToFile "./testnet/typedDatum22.plutus" typedDatum22Val
+saveTypedDatum22 =  writeValidatorToFile "./TypeWrap/typedDatum22.plutus" typedDatum22Val
 
 saveTypedRedeemer11 :: IO ()
-saveTypedRedeemer11 =  writeValidatorToFile "./testnet/typedRedeemer11.plutus" typedRedeemer11Val
+saveTypedRedeemer11 =  writeValidatorToFile "./TypeWrap/typedRedeemer11.plutus" typedRedeemer11Val
 
 saveCustomTypedDatum22 :: IO ()
-saveCustomTypedDatum22 =  writeValidatorToFile "./testnet/customTypedDatum22.plutus" customTypedDatum22Val
+saveCustomTypedDatum22 =  writeValidatorToFile "./TypeWrap/customTypedDatum22.plutus" customTypedDatum22Val
 
 saveCustomTypedRedeemer11 :: IO ()
-saveCustomTypedRedeemer11 =  writeValidatorToFile "./testnet/customTypedRedeemer11.plutus" customTypedRedeemer11Val
+saveCustomTypedRedeemer11 =  writeValidatorToFile "./TypeWrap/customTypedRedeemer11.plutus" customTypedRedeemer11Val
 
 saveUnit :: IO ()
-saveUnit = writeDataToFile "./testnet/unit.json" ()
+saveUnit = writeDataToFile "./TypeWrap/unit.json" ()
 
 saveValue11 :: IO ()
-saveValue11 = writeDataToFile "./testnet/value11.json" (11 :: Integer)
+saveValue11 = writeDataToFile "./TypeWrap/value11.json" (11 :: Integer)
 
 saveValue22 :: IO ()
-saveValue22 = writeDataToFile "./testnet/value22.json" (22 :: Integer)
+saveValue22 = writeDataToFile "./TypeWrap/value22.json" (22 :: Integer)
 
 saveGoodDatum  :: IO ()
-saveGoodDatum = writeDataToFile "./testnet/goodOWD.json" (OWD 22)
+saveGoodDatum = writeDataToFile "./TypeWrap/goodOWD.json" (OWD 22)
 
 saveBadDatum  :: IO ()
-saveBadDatum = writeDataToFile "./testnet/badOWD.json" (OWD 23)
+saveBadDatum = writeDataToFile "./TypeWrap/badOWD.json" (OWD 23)
 
 saveOWR  :: IO ()
-saveOWR = writeDataToFile "./testnet/OWR.json" ()
+saveOWR = writeDataToFile "./TypeWrap/OWR.json" ()
 
 saveGoodJOKER :: IO ()
-saveGoodJOKER = writeDataToFile "./testnet/GoodJoker.json" (JOKER True)
+saveGoodJOKER = writeDataToFile "./TypeWrap/GoodJoker.json" (JOKER True)
 
 saveBadJOKER :: IO ()
-saveBadJOKER = writeDataToFile "./testnet/BadJoker.json" (JOKER False)
+saveBadJOKER = writeDataToFile "./TypeWrap/BadJoker.json" (JOKER False)
 
 saveAll :: IO ()
 saveAll = do
