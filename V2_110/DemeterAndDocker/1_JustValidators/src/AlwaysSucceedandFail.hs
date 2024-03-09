@@ -56,6 +56,14 @@ datumEqredeemer datum redeemer _
  | otherwise            = error ()
 
 
+{-# INLINEABLE dEQr #-}
+dEQr :: BuiltinData -> BuiltinData -> BuiltinData -> ()
+dEQr datum redeemer _
+ | redeemer == datum    = ()
+ | redeemer == mkI 11   = ()
+ | otherwise            = error ()
+
+
 alwaysSucceedsValidator :: Validator
 alwaysSucceedsValidator = mkValidatorScript $$(PlutusTx.compile [|| alwaysSucceeds ||])  
 
@@ -77,50 +85,56 @@ datum999Validator = mkValidatorScript $$(PlutusTx.compile [|| datum999 ||])
 datumEqredeemerValidator :: Validator
 datumEqredeemerValidator = mkValidatorScript $$(PlutusTx.compile [|| datumEqredeemer ||])
 
+dEQrValidator :: Validator
+dEQrValidator = mkValidatorScript $$(PlutusTx.compile [|| dEQr ||])
+
 
 {- Serialised Scripts and Values -}
 
 saveAlwaysSucceeds :: IO ()
-saveAlwaysSucceeds =  writeValidatorToFile "./HandsOnOne/alwaysSucceeds.plutus" alwaysSucceedsValidator
+saveAlwaysSucceeds =  writeValidatorToFile "./dEQr/alwaysSucceeds.plutus" alwaysSucceedsValidator
 
 saveAlwaysFails :: IO ()
-saveAlwaysFails =  writeValidatorToFile "./HandsOnOne/alwaysFails.plutus" alwaysFailsValidator
+saveAlwaysFails =  writeValidatorToFile "./dEQr/alwaysFails.plutus" alwaysFailsValidator
 
 saveRedeemer11 :: IO ()
-saveRedeemer11 =  writeValidatorToFile "./HandsOnOne/redeemer11.plutus" redeemer11Validator
+saveRedeemer11 =  writeValidatorToFile "./dEQr/redeemer11.plutus" redeemer11Validator
 
 saveDatum22 :: IO ()
-saveDatum22 =  writeValidatorToFile "./HandsOnOne/datum22.plutus" datum22Validator
+saveDatum22 =  writeValidatorToFile "./dEQr/datum22.plutus" datum22Validator
 
 saveDatum23 :: IO ()
-saveDatum23 =  writeValidatorToFile "./HandsOnOne/datum23.plutus" datum23Validator
+saveDatum23 =  writeValidatorToFile "./dEQr/datum23.plutus" datum23Validator
 
 saveDatum999 :: IO ()
-saveDatum999 =  writeValidatorToFile "./HandsOnOne/datum999.plutus" datum999Validator
+saveDatum999 =  writeValidatorToFile "./dEQr/datum999.plutus" datum999Validator
 
 saveDatumEqredeemer :: IO ()
-saveDatumEqredeemer = writeValidatorToFile "./HandsOnOne/datumEqredeemer.plutus" datumEqredeemerValidator
+saveDatumEqredeemer = writeValidatorToFile "./dEQr/datumEqredeemer.plutus" datumEqredeemerValidator
+
+saveDEQr :: IO ()
+saveDEQr = writeValidatorToFile "./dEQr/dEQr.plutus" dEQrValidator
 
 saveUnit :: IO ()
-saveUnit = writeDataToFile "./HandsOnOne/unit.json" ()
+saveUnit = writeDataToFile "./dEQr/unit.json" ()
 
 saveTrue :: IO ()
-saveTrue = writeDataToFile "./HandsOnOne/True.json" True
+saveTrue = writeDataToFile "./dEQr/True.json" True
 
 saveFalse :: IO ()
-saveFalse = writeDataToFile "./HandsOnOne/False.json" False
+saveFalse = writeDataToFile "./dEQr/False.json" False
 
 saveValue11 :: IO ()
-saveValue11 = writeDataToFile "./HandsOnOne/value11.json" (11 :: Integer)
+saveValue11 = writeDataToFile "./dEQr/value11.json" (11 :: Integer)
 
 saveValue22 :: IO ()
-saveValue22 = writeDataToFile "./HandsOnOne/value22.json" (22 :: Integer)
+saveValue22 = writeDataToFile "./dEQr/value22.json" (22 :: Integer)
 
 saveValue23 :: IO ()
-saveValue23 = writeDataToFile "./HandsOnOne/value23.json" (23 :: Integer)
+saveValue23 = writeDataToFile "./dEQr/value23.json" (23 :: Integer)
 
 saveValue999 :: IO ()
-saveValue999 = writeDataToFile "./HandsOnOne/value999.json" (999 :: Integer)
+saveValue999 = writeDataToFile "./dEQr/value999.json" (999 :: Integer)
 
 saveAll :: IO ()
 saveAll = do
@@ -130,11 +144,12 @@ saveAll = do
             saveDatum22
             saveDatum23
             saveDatum999
+            saveDatumEqredeemer
+            saveDEQr
             saveUnit
             saveTrue
             saveFalse
             saveValue11
             saveValue22
             saveValue23
-            saveDatumEqredeemer
             saveValue999
