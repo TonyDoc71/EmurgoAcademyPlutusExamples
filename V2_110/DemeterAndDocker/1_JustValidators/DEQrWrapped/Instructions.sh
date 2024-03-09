@@ -1,3 +1,23 @@
+## wrapped Datum Transaction
+## setup new alwaysFailsTT.addr for script storage 
+
+
+
+## try this one to get a unique address for the always fails
+
+{-# INLINABLE allFailTony71Tutorials #-}
+allFailTony71Tutorials :: BuiltinData -> BuiltinData -> BuiltinData -> ()   
+allFailTony71Tutorials _ _ _ = customErrorFunction
+
+customErrorFunction :: a
+customErrorFunction = error ()
+
+
+
+
+## AlwaysSucceedandFail.hs
+## new save file and new alwaysFailsTT.addr and validator script to make it easier to find my transactions
+
 {-# LANGUAGE DataKinds           #-}  --Enable datatype promotions
 {-# LANGUAGE NoImplicitPrelude   #-}  --Don't load native prelude to avoid conflict with PlutusTx.Prelude
 {-# LANGUAGE TemplateHaskell     #-}  --Enable Template Haskell splice and quotation syntax
@@ -23,9 +43,9 @@ alwaysSucceeds _ _ _ = ()
 alwaysFails :: BuiltinData -> BuiltinData -> BuiltinData -> ()   
 alwaysFails _ _ _ = error ()
 
-{-# INLINABLE allFailTony71Tutorials #-}
-allFailTony71Tutorials :: BuiltinData -> BuiltinData -> BuiltinData -> ()   
-allFailTony71Tutorials _ _ _ = error ()
+{-# INLINABLE alwaysFailsTonyTutorials #-}
+alwaysFailsTonyTutorials :: BuiltinData -> BuiltinData -> BuiltinData -> ()   
+alwaysFailsTonyTutorials _ _ _ = error ()
 
 {-# INLINABLE redeemer11 #-}
 redeemer11 :: BuiltinData -> BuiltinData -> BuiltinData -> ()
@@ -74,8 +94,8 @@ alwaysSucceedsValidator = mkValidatorScript $$(PlutusTx.compile [|| alwaysSuccee
 alwaysFailsValidator :: Validator
 alwaysFailsValidator = mkValidatorScript $$(PlutusTx.compile [|| alwaysFails ||])
 
-allFailTony71TutorialsValidator :: Validator
-allFailTony71TutorialsValidator = mkValidatorScript $$(PlutusTx.compile [|| allFailTony71Tutorials ||])  
+alwaysFailsTonyTutorialsValidator :: Validator
+alwaysFailsTonyTutorialsValidator = mkValidatorScript $$(PlutusTx.compile [|| alwaysFailsTonyTutorials ||])  
 
 redeemer11Validator :: Validator
 redeemer11Validator = mkValidatorScript $$(PlutusTx.compile [|| redeemer11 ||])  
@@ -104,8 +124,8 @@ saveAlwaysSucceeds =  writeValidatorToFile "./DEQrWrapped/alwaysSucceeds.plutus"
 saveAlwaysFails :: IO ()
 saveAlwaysFails =  writeValidatorToFile "./DEQrWrapped/alwaysFails.plutus" alwaysFailsValidator
 
-saveAllFailTony71Tutorials :: IO ()
-saveAllFailTony71Tutorials =  writeValidatorToFile "./DEQrWrapped/allFail71TT.plutus" allFailTony71TutorialsValidator
+saveAlwaysFailsTonyTutorials :: IO ()
+saveAlwaysFailsTonyTutorials =  writeValidatorToFile "./DEQrWrapped/alwaysFailsTT.plutus" alwaysFailsTonyTutorialsValidator
 
 saveRedeemer11 :: IO ()
 saveRedeemer11 =  writeValidatorToFile "./DEQrWrapped/redeemer11.plutus" redeemer11Validator
@@ -150,7 +170,7 @@ saveAll :: IO ()
 saveAll = do
             saveAlwaysSucceeds
             saveAlwaysFails
-            saveAllFailTony71Tutorials
+            saveAlwaysFailsTonyTutorials
             saveRedeemer11
             saveDatum22
             saveDatum23
@@ -167,7 +187,7 @@ saveAll = do
 
 saveDEQRv2 :: IO ()
 saveDEQRv2 = do
-            saveAllFailTony71Tutorials
+            saveAlwaysFailsTonyTutorials
             saveDatum999
             saveTrue
             saveDEQr

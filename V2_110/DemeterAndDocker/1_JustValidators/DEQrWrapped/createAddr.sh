@@ -1,2 +1,2 @@
 cardano-cli address build --payment-script-file dEQr.plutus --testnet-magic 2 --out-file dEQr.addr
-cardano-cli address build --payment-script-file alwaysFailsTT.plutus --testnet-magic 2 --out-file alwaysFailsTT.addr
+cardano-cli address build --payment-script-file allFail71TT.plutus --testnet-magic 2 --out-file allFail71TT.addr
