@@ -1,0 +1,1 @@
+cardano-cli address build --payment-script-file conditionator.plutus --testnet-magic 2 --out-file conditionator.addr

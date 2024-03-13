@@ -32,9 +32,9 @@ Constructor #
 
 
 ## constructor index 0
-const0 [I 22]
+const0 [I 22]                      -- Integer 22
 ## constructor index 1
-const1 [const0 []]
+const1 [const0 []]                 -- wrapping constructor 0
 
 ## constructors will always contain the value not a place holder with the exception of Bool you can use a place holder
 
