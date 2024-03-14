@@ -60,22 +60,22 @@ conditionsValidator =  PlutusV2.mkValidatorScript $$(PlutusTx.compile [|| mapped
 {- Serialised Scripts and Values -}
 
 saveConditionsValidator :: IO ()
-saveConditionsValidator =  writeValidatorToFile "./CC-HO2/conditionator.plutus" conditionsValidator
+saveConditionsValidator =  writeValidatorToFile "./CC-TimeConst/conditionator.plutus" conditionsValidator
 
 saveUnit :: IO ()
-saveUnit = writeDataToFile "./CC-HO2/unit.json" ()
+saveUnit = writeDataToFile "./CC-TimeConst/unit.json" ()
 
 saveDatum :: IO ()
-saveDatum  = writeDataToFile "./CC-HO2/datum.json" (Conditions "832bb3d5216092580bb596b6fd35ae845c63adececd7958466ec38a5" 1686837045000 50)
+saveDatum  = writeDataToFile "./CC-TimeConst/datum.json" (Conditions "832bb3d5216092580bb596b6fd35ae845c63adececd7958466ec38a5" 1710418106000 50)1710389306000
 
 saveRedeemerOwner :: IO ()
-saveRedeemerOwner = writeDataToFile "./CC-HO2/redeemOwner.json" Owner
+saveRedeemerOwner = writeDataToFile "./CC-TimeConst/redeemOwner.json" Owner
 
 saveRedeemerTime :: IO ()
-saveRedeemerTime = writeDataToFile "./CC-HO2/redeemTime.json" Time
+saveRedeemerTime = writeDataToFile "./CC-TimeConst/redeemTime.json" Time
 
 saveRedeemerPrice :: IO ()
-saveRedeemerPrice = writeDataToFile "./CC-HO2/redeemPrice.json" Price
+saveRedeemerPrice = writeDataToFile "./CC-TimeConst/redeemPrice.json" Price
 
 saveAll :: IO ()
 saveAll = do
