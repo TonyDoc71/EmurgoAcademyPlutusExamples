@@ -20,6 +20,14 @@ Observations:
 ## have created new script CommonCon2.hs    -- for hands on 3 --
 
 
+used 100 as mion value
+used 1ent107.phk
+used 1 month from 16/3/24 as the time limit
+have already locked 111ADA on conditionator.addr
+having issed redeeming with all 3 conditions.
+value seems to bne the issue
+
+
 
 
 ## ---------------------------------- previous hands on examples --------------------------------------------
@@ -75,6 +83,9 @@ conditionator datum redeemer sContext = case redeemer of
         info :: TxInfo
         info = scriptContextTxInfo sContext
 
+
+meetAllConditions :: Bool -> Bool -> Bool -> Bool
+meetAllConditions ownerSigned withinTime priceMet = ownerSigned && withinTime && priceMet
 
 
 mappedCommonConditions :: BuiltinData -> BuiltinData -> BuiltinData -> ()
