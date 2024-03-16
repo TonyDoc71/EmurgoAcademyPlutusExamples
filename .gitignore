@@ -21,10 +21,7 @@ cabal.project.local
 cabal.project.local~
 .HTF/
 .ghc.environment.*
-*.plutus
 V2_110/DemeterAndDocker/3_NativeTokens/testnet/protocol.params
 V2_110/DemeterAndDocker/3_NativeTokens/testnet/unit.json
-*.json
-*.signed
 *.body
 *.pid

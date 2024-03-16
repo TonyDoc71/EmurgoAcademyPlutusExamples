@@ -17,12 +17,12 @@
 Observations:
     Notice that different datums might validate the same conditions.
 
+## have created new script CommonCon2.hs    -- for hands on 3 --
 
 
 
 
-
-
+## ---------------------------------- previous hands on examples --------------------------------------------
 
 ## commonConditions.hs
 
@@ -74,6 +74,7 @@ conditionator datum redeemer sContext = case redeemer of
 
         info :: TxInfo
         info = scriptContextTxInfo sContext
+
 
 
 mappedCommonConditions :: BuiltinData -> BuiltinData -> BuiltinData -> ()

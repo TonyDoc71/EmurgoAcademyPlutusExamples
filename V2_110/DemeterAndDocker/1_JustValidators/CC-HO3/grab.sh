@@ -1,7 +1,7 @@
-utxoin="25ff103ce24582340d31a42854f52537b32b2836421fd5b80562a2c242d12959#0"
+utxoin="751a3f30783e7b647e5771c09f655e8891c0fd2cd9c73f178a0937eea4a2496c#0"
 address=$(cat ../../WalletMine/4stake2.addr)
 scAddr=$(cat conditionator.addr)
-output="150000000"
+output="55000000"
 collateral="4f507a7d6d5ed9a71b78e62b71372498d3379ffaf31e140e5d7c6c811ea03895#1"
 collateralPKH=$(cat ../../WalletMine/5payment3.pkh)
 signerPKH=$(cat ../../WalletMine/1ent107.pkh)
@@ -18,13 +18,14 @@ cardano-cli transaction build \
   --tx-in-script-file conditionator.plutus \
   --tx-in-datum-file datum.json \
   --tx-in-redeemer-file redeemOwner.json \
+  --tx-in-redeemer-file redeemTime.json \
+  --tx-in-redeemer-value redeemPrice.json \
   --required-signer-hash $collateralPKH \
   --required-signer-hash $signerPKH \
   --tx-in-collateral $collateral \
   --tx-out $address+$output \
-  --tx-out $scAddr+$output \
-  --tx-out-datum-hash-file datum.json \
   --change-address $nami \
+  --invalid-hereafter 43933913 \
   --protocol-params-file protocol.params \
   --out-file grab.unsigned
 
