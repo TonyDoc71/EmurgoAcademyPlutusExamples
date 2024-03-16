@@ -44,8 +44,30 @@ Interval {ivFrom = LowerBound NegInf True, ivTo = UpperBound (Finite 10) True}
 # $ y
 Interval {ivFrom = LowerBound (Finite 1710411021) True, ivTo = UpperBound PosInf True}
 
-# $ contains (to 1798609483) (to 1712209483)
+# $ contains (to 1712209483) (to 1798609483)
 True     ## the first interval contains the second
+
+## datum.json
+## {"constructor":0,"fields":[{"bytes":"a2a15a1901d0229101bcb31629629210ce8d2ccf058d05afea33e273"},{"int":1686837045000},{"int":50}]}
+
+## redeemerOwner.json
+## {"constructor":0,"fields":[]}
+
+## redeemerPrice.json
+## {"constructor":2,"fields":[]}
+
+## redeemerTime.json
+## {"constructor":1,"fields":[]}
+
+## notice all the fileds are empty its the constructor index that changes
+## be carefull you don't end up with a common redeemer like True or unit as it will be easy to unlock value
+## experiment with long index numbers in the costructor
+
+
+## derive address
+## cardano-cli address build --payment-script-file conditionator.plutus --testnet-magic 2 --out-file conditionator.addr
+## can be put in a shell script bash$ chmod +x getAddr.sh   bash$ ./getAddr.sh
+
 
 
 
@@ -153,6 +175,87 @@ saveAll = do
 
 ## give.sh
 
+utxoin1="f02d07f68407583f7b36792ec231de4b3b37b7063c7029d76109b392f0429c55#2"
+address=$(cat conditionator.addr) 
+output="198000000"
+PREVIEW="--testnet-magic 2"
+nami=$(cat ../../WalletMine/Nami.addr)
+
+cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.params
+
+cardano-cli transaction build \
+  --babbage-era \
+  $PREVIEW \
+  --tx-in $utxoin1 \
+  --tx-out $address+$output \
+  --tx-out-datum-hash-file datum.json \
+  --change-address $nami \
+  --protocol-params-file protocol.params \
+  --out-file give.unsigned
+
+cardano-cli transaction sign \
+    --tx-body-file give.unsigned \
+    --signing-key-file ../../WalletMine/4payment2.skey \
+    $PREVIEW \
+    --out-file give.signed
+
+ cardano-cli transaction submit \
+    $PREVIEW \
+    --tx-file give.signed
+
+
+
+## bash $ cardano-cli query tip --testnet-magic 2
+## to get current slot number for grab.sh script
+
+
+## grab.sh
+
+
+utxoin="85e0b74febe6faa304c3d88901589c13701b74666cc83f21913e14782949e1e9#0"
+address=$(cat ../../WalletMine/4stake2.addr)
+scAddr=$(cat conditionator.addr)
+output="98000000"
+collateral="4f507a7d6d5ed9a71b78e62b71372498d3379ffaf31e140e5d7c6c811ea03895#1"
+collateralPKH=$(cat ../../WalletMine/5payment3.pkh)
+signerPKH=$(cat ../../WalletMine/1ent107.pkh)
+nami="addr_test1qzwmwrahq43k0q5cktcv8dfh3ud9y3kr6udvp86heryd7w38rdzjclsf9svxrl67346q6a9uawvykesynl2d6cjt0plsuztp5u" 
+PREVIEW="--testnet-magic 2"
+
+cardano-cli query protocol-parameters --testnet-magic 2 --out-file protocol.params
+
+cardano-cli transaction build \
+  --babbage-era \
+  $PREVIEW \
+  --tx-in $utxoin \
+  --tx-in-script-file conditionator.plutus \
+  --tx-in-datum-file datum.json \
+  --tx-in-redeemer-file redeemTime.json \
+  --required-signer-hash $collateralPKH \      ## only need collateral public key hash as we areredeeming on time not owner
+  --tx-in-collateral $collateral \
+  --tx-out $address+$output \
+  --change-address $nami \
+  --invalid-hereafter 43927400 \                 ## need to add this line and pick a slot number in the near future
+  --protocol-params-file protocol.params \       ## bash $ cardano-cli query tip --testnet-magic 2
+  --out-file grab.unsigned
+
+cardano-cli transaction sign \
+    --tx-body-file grab.unsigned \
+    --signing-key-file ../../WalletMine/5payment3.skey \     ## only need collateral signing key as we are redeeming from time not owner
+    $PREVIEW \
+    --out-file grab.signed
+
+ cardano-cli transaction submit \
+    $PREVIEW \
+    --tx-file grab.signed
+
+
+
+## ------------------- failed first attempt below -------------------
+
+
+## give.sh
+
 utxoin1="f02d07f68407583f7b36792ec231de4b3b37b7063c7029d76109b392f0429c55#3"
 address=$(cat conditionator.addr) 
 output="198000000"
@@ -185,6 +288,7 @@ cardano-cli transaction sign \
 
 ## grab.sh
 ## failed the first time with time constraint, redid with redeemOwner.json
+## failed because missing --invalid-hereafter 43927400 \   with a valid time slot
 ## probably failed due to wron time zone when using the epoch converter will try again
 
 utxoin="722b82055e08314dbf6c5d7744a590e68886e497ff2a2aca293d6efb86f73f07#0"
@@ -248,26 +352,6 @@ cardano-cli transaction sign \
 
 
 
-## datum.json
-## {"constructor":0,"fields":[{"bytes":"a2a15a1901d0229101bcb31629629210ce8d2ccf058d05afea33e273"},{"int":1686837045000},{"int":50}]}
-
-## redeemerOwner.json
-## {"constructor":0,"fields":[]}
-
-## redeemerPrice.json
-## {"constructor":2,"fields":[]}
-
-## redeemerTime.json
-## {"constructor":1,"fields":[]}
-
-## notice all the fileds are empty its the constructor index that changes
-## be carefull you don't end up with a common redeemer like True or unit as it will be easy to unlock value
-## experiment with long index numbers in the costructor
-
-
-## derive address
-## cardano-cli address build --payment-script-file conditionator.plutus --testnet-magic 2 --out-file conditionator.addr
-## can be put in a shell script bash$ chmod +x getAddr.sh   bash$ ./getAddr.sh
 
 ## --------------- give.sh
 

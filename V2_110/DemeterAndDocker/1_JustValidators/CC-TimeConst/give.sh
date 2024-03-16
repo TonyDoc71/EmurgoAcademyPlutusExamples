@@ -1,4 +1,4 @@
-utxoin1="f02d07f68407583f7b36792ec231de4b3b37b7063c7029d76109b392f0429c55#3"
+utxoin1="f02d07f68407583f7b36792ec231de4b3b37b7063c7029d76109b392f0429c55#2"
 address=$(cat conditionator.addr) 
 output="198000000"
 PREVIEW="--testnet-magic 2"

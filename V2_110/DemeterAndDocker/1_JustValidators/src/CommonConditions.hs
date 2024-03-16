@@ -66,7 +66,7 @@ saveUnit :: IO ()
 saveUnit = writeDataToFile "./CC-TimeConst/unit.json" ()
 
 saveDatum :: IO ()
-saveDatum  = writeDataToFile "./CC-TimeConst/datum.json" (Conditions "832bb3d5216092580bb596b6fd35ae845c63adececd7958466ec38a5" 1710418106000 50)1710389306000
+saveDatum  = writeDataToFile "./CC-TimeConst/datum.json" (Conditions "832bb3d5216092580bb596b6fd35ae845c63adececd7958466ec38a5" 1710592233000 50)
 
 saveRedeemerOwner :: IO ()
 saveRedeemerOwner = writeDataToFile "./CC-TimeConst/redeemOwner.json" Owner
