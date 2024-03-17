@@ -74,6 +74,9 @@ saveRedeemerTime = writeDataToFile "./testnet/redeemTime.json" Time
 saveRedeemerPrice :: IO ()
 saveRedeemerPrice = writeDataToFile "./testnet/redeemPrice.json" Price
 
+saveOR :: IO ()
+saveOR  = writeDataToFile "./testnet/ourRedeemer.json" (OR Owner "8fd2af318fe6fd7a8b2f56861b7dda312411281616b902953abf7121" 1686837045000 50)
+
 saveAll :: IO ()
 saveAll = do
             saveEAcoinsPolicy
@@ -81,3 +84,4 @@ saveAll = do
             saveRedeemerOwner
             saveRedeemerPrice
             saveRedeemerTime
+            saveOR
