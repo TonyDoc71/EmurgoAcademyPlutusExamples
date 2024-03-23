@@ -1,11 +1,11 @@
-utxoin1="7cbd8e53bdbca00a812f6298d979d29b1e06e38b3ae45a4bbe2d06da7735ff4a#0"
-utxoin2="a8099f785592c1872613b4f49d817f84facc74b8cde8230347cd602828417083#0"
+utxoin1="a5580562b61f21c66f0f702e190c93e1be75f85fcc6eaf0c4948b8b41dd8874b#0"
+utxoin2="bbc76f91ff462df678ee67867e660468b5b231828c11c7669785c1a2b9e9fa1f#0"
 policyid=$(cat eaCoins.pid)
 nami="addr_test1qzwmwrahq43k0q5cktcv8dfh3ud9y3kr6udvp86heryd7w38rdzjclsf9svxrl67346q6a9uawvykesynl2d6cjt0plsuztp5u"
 output="10000000"
-tokenamount="-7500"
-tokenname="746f6e794261746368313037" ##$(echo -n "tonyBatch107" | xxd -ps | tr -d '\n') ## can put byte 16 code for the token here instead
-collateral="a8099f785592c1872613b4f49d817f84facc74b8cde8230347cd602828417083#0"
+tokenamount="-40"
+tokenname=$(echo -n "tony2Batch107" | xxd -ps | tr -d '\n') ## can put byte 16 code for the token here instead
+collateral="05c86cc4c89456e804dab704bc70bc18447635ec1ff9c908044eedb253d47f35#0"
 signerPKH="a2a15a1901d0229101bcb31629629210ce8d2ccf058d05afea33e273"
 ownerPKH=""
 notneeded="--invalid-hereafter 10962786"
@@ -34,6 +34,7 @@ cardano-cli transaction build \
 cardano-cli transaction sign \
     --tx-body-file burnTx.body \
     --signing-key-file ../../WalletMine/5payment3.skey \
+    --signing-key-file ../../WalletMine/4payment2.skey \
     $PREVIEW \
     --out-file burnTx.signed
 

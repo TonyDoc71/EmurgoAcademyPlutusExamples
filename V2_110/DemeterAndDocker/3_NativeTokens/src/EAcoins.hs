@@ -60,22 +60,22 @@ eaCoinsPolicy = mkMintingPolicyScript $$(PlutusTx.compile [|| wrappedEAcoinsPoli
 -- Serialised Scripts and Values 
 
 saveEAcoinsPolicy :: IO ()
-saveEAcoinsPolicy = writePolicyToFile "testnet/EAcoins.plutus" eaCoinsPolicy
+saveEAcoinsPolicy = writePolicyToFile "testnet2/eaCoins.plutus" eaCoinsPolicy
 
 saveUnit :: IO ()
-saveUnit = writeDataToFile "./testnet/unit.json" ()
+saveUnit = writeDataToFile "./testnet2/unit.json" ()
 
 saveRedeemerOwner :: IO ()
-saveRedeemerOwner = writeDataToFile "./testnet/redeemOwner.json" Owner
+saveRedeemerOwner = writeDataToFile "./testnet2/redeemOwner.json" Owner
 
 saveRedeemerTime :: IO ()
-saveRedeemerTime = writeDataToFile "./testnet/redeemTime.json" Time
+saveRedeemerTime = writeDataToFile "./testnet2/redeemTime.json" Time
 
 saveRedeemerPrice :: IO ()
-saveRedeemerPrice = writeDataToFile "./testnet/redeemPrice.json" Price
+saveRedeemerPrice = writeDataToFile "./testnet2/redeemPrice.json" Price
 
 saveOR :: IO ()
-saveOR  = writeDataToFile "./testnet/ourRedeemer.json" (OR Owner "8fd2af318fe6fd7a8b2f56861b7dda312411281616b902953abf7121" 1686837045000 50)
+saveOR  = writeDataToFile "./testnet2/ourRedeemer.json" (OR Owner "a2a15a1901d0229101bcb31629629210ce8d2ccf058d05afea33e273" 1686837045000 50)
 
 saveAll :: IO ()
 saveAll = do
