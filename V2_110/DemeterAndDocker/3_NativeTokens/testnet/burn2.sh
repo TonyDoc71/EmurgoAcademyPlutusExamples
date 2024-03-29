@@ -1,16 +1,17 @@
-utxoin1="3217e43c7da8bdbe5f985b31fa40be0a937574c720494c12aaf22d6047f6dfd0#0"
-utxoin2="c288698c70fea6628947d0d0a7267b611b768a2499903ad776d94d062f8fb2b5#0"
+utxoin1="7cbd8e53bdbca00a812f6298d979d29b1e06e38b3ae45a4bbe2d06da7735ff4a#0"
+utxoin2="4856ddc8306e8b4bb1c2440b491968a762968e40e423e490406ffa7e1dfe5fd7#0"
 policyid=$(cat eaCoins.pid)
 nami="addr_test1qzwmwrahq43k0q5cktcv8dfh3ud9y3kr6udvp86heryd7w38rdzjclsf9svxrl67346q6a9uawvykesynl2d6cjt0plsuztp5u"
 output="10000000"
-tokenamount="-17000"
+tokenamount="-10000"
 tokenamount2="7000
-tokenname="546f6e794261746368313037"
+tokenname="746f6e794261746368313037"
 collateral="05c86cc4c89456e804dab704bc70bc18447635ec1ff9c908044eedb253d47f35#0"
 signerPKH="a2a15a1901d0229101bcb31629629210ce8d2ccf058d05afea33e273"
 ownerPKH=""
 notneeded="--invalid-hereafter 10962786"
 PREVIEW="--testnet-magic 2"
+
 
 
 cardano-cli transaction build \
@@ -20,7 +21,8 @@ cardano-cli transaction build \
   --tx-in $utxoin2 \
   --required-signer-hash $signerPKH \
   --tx-in-collateral $collateral \
-  --tx-out $(cat ../../WalletMine/5stake3.addr)+$output \
+  --tx-out $nami+$output \
+  --tx-out $nami+$output+"$tokenamount $policyid.$tokenname" \
   --change-address $nami \
   --mint "$tokenamount $policyid.$tokenname" \
   --mint-script-file eaCoins.plutus \

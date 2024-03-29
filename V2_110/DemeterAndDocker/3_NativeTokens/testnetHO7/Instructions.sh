@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+## unmodified EAcoins.hs script
+
 {-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE TemplateHaskell   #-}

@@ -19,15 +19,20 @@ import           Prelude                (IO)
 
 -- ON-CHAIN CODE
 
-data Action = Owner | Time | Price
+-- update here for HO7
+
+data Action = Owner1 | Owner2
 unstableMakeIsData ''Action
 
 data OurRedeemer = OR { action :: Action
-                   , owner :: PubKeyHash
+                   , owner1 :: PubKeyHash
                    , timelimit :: POSIXTime
                    , price :: Integer }
 
 unstableMakeIsData ''OurRedeemer
+
+
+--update here for HO7
 
 {-# INLINABLE eaCoins #-}
 eaCoins :: OurRedeemer -> ScriptContext -> Bool

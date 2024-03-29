@@ -1,6 +1,6 @@
 utxoin="4b6bda5d37598571a89dc876885c5a973bb50e405a50a8545c6f65d395176739#5"
 address=$(cat mathBounty.addr) 
-output="50000000"
+output="77000000"
 PREVIEW="--testnet-magic 2"
 # Provide a wallet to see the tx in blockchain explorers
 nami="addr_test1qpc6mrwu9cucrq4w6y69qchflvypq76a47ylvjvm2wph4szeq579yu2z8s4m4tn0a9g4gfce50p25afc24knsf6pj96sz35wnt"
