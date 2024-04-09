@@ -1,0 +1,37 @@
+{
+  "preamble": {
+    "title": "match107/learning",
+    "description": "Aiken contracts for project 'match107/learning'",
+    "version": "0.0.0",
+    "plutusVersion": "v2",
+    "compiler": {
+      "name": "Aiken",
+      "version": "v1.0.24-alpha+982eff4"
+    },
+    "license": "Apache-2.0"
+  },
+  "validators": [
+    {
+      "title": "alwayssuccweeds.demoVal",
+      "datum": {
+        "title": "datum",
+        "schema": {
+          "$ref": "#/definitions/Int"
+        }
+      },
+      "redeemer": {
+        "title": "redeemer",
+        "schema": {
+          "$ref": "#/definitions/Int"
+        }
+      },
+      "compiledCode": "58390100003222232325333006533300653330063370e002900b0a5114a0294454ccc018cdc3a405800429445280a4c26cac6eb400cdd6801ab9a1",
+      "hash": "6b04ab53d5d6dd10d4052d29744e5123624557ffdeeefd6f431b2b3e"
+    }
+  ],
+  "definitions": {
+    "Int": {
+      "dataType": "integer"
+    }
+  }
+}

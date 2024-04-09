@@ -1,0 +1,14 @@
+name = "emurgo/batch107aiken1"
+version = "0.0.0"
+license = "Apache-2.0"
+description = "Aiken contracts for project 'emurgo/batch107aiken1'"
+
+[repository]
+user = "emurgo"
+project = "batch107aiken1"
+platform = "github"
+
+[[dependencies]]
+name = "aiken-lang/stdlib"
+version = "1.7.0"
+source = "github"
